@@ -325,3 +325,56 @@ REFERENCES [dbo].[Generos] ([Id])
 GO
 ALTER TABLE [dbo].[FilmesGenero] CHECK CONSTRAINT [FK__FilmesGen__IdGen__2E1BDC42]
 GO
+
+
+
+
+
+-- As imagens estao desatualizadas, fiz alguma alterações para se encaixar no desafio
+-- Desafio feito usando o MySQL
+
+
+-- 1
+select Nome, Ano FROM Filmes;
+
+-- 2
+SELECT Nome, Ano FROM filmes ORDER BY Ano;
+
+-- 3
+SELECT Nome, Ano, Duracao FROM filmes WHERE Nome = "O Franco Atirador";
+
+-- 4
+SELECT Nome, Ano, Duracao FROM filmes WHERE Ano = 1997;
+
+-- 5
+SELECT Nome, Ano, Duracao FROM filmes WHERE Ano > 2000;
+
+-- 6
+SELECT Nome, Ano, Duracao FROM filmes WHERE Duracao > 100 && Duracao < 150 ORDER BY Duracao;
+
+-- 7
+Select Ano, COUNT(*) Quantidade FROM filmes GROUP BY Ano ORDER BY MAX(Duracao) DESC;
+
+-- 8
+SELECT Id, PrimeiroNome, UltimoNome, Genero FROM atores WHERE GENERO = "M";
+
+-- 9
+SELECT Id, PrimeiroNome, UltimoNome, Genero FROM atores WHERE GENERO = "F" ORDER BY PrimeiroNome;
+
+-- 10
+SELECT F.Nome , G.Genero
+FROM Filmes F
+inner JOIN FilmesGenero FG ON F.Id = FG.IdFilme
+inner JOIN Generos G ON FG.IdGenero = G.Id;
+
+-- 11
+SELECT F.Nome , G.Genero
+FROM Filmes F
+inner JOIN FilmesGenero FG ON F.Id = FG.IdFilme
+inner JOIN Generos G ON FG.IdGenero = G.Id && Genero = "Aventura";
+
+-- 12
+SELECT F.Nome, A.PrimeiroNome, A.UltimoNome, E.Papel
+FROM filmes F
+INNER JOIN elencofilme E ON F.Id = E.IdFilme
+INNER JOIN atores A ON E.IdAtor = A.Id;
